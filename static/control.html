@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Bootstrap 101 Template</title>
+
+    <!-- Bootstrap -->
+    <link href="/static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+<div class="controller">
+    <div class="btn"><a onclick="perform_action('forwards');">Forward</a></div>
+    <div class="btn"><a onclick="perform_action('backwards');">Backwards</a></div>
+    <div class="btn"><a onclick="perform_action('left');">Left</a></div>
+    <div class="btn"><a onclick="perform_action('right');">Right</a></div>
+
+    <div class="btn"><a onclick="perform_action('clockwise');">Clockwise</a></div>
+    <div class="btn"><a onclick="perform_action('anticlockwise');">Anti-clockwise</a></div>
+
+    <div class="btn"><a onclick="perform_action('arm_up');">Arm Up</a></div>
+    <div class="btn"><a onclick="perform_action('arm_down');">Arm Down</a></div>
+
+    <div class="btn"><a onclick="perform_action('bucket_in');">Bucket In</a></div>
+    <div class="btn"><a onclick="perform_action('bucket_out');">Bucket Out</a></div>
+
+    <div class="btn"><a onclick="perform_action('stop');">STOP!</a></div>
+</div>
+<div class="message_log" id="command_log">
+    Command Log:
+    <ol class="actions" id="actions">
+    </ol>
+</div>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="/static/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/static/digger_api.js"></script>
+</body>
+</html>

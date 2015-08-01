@@ -20,7 +20,7 @@
 
 <body>
 
-<div class="controller">
+<div class="content" id="controller">
     <div class="btn"><a onclick="perform_action('forwards');">Forward</a></div>
     <div class="btn"><a onclick="perform_action('backwards');">Backwards</a></div>
     <div class="btn"><a onclick="perform_action('left');">Left</a></div>
@@ -37,13 +37,21 @@
 
     <div class="btn"><a onclick="perform_action('stop');">STOP!</a></div>
 </div>
-<div class="message_log" id="command_log">
+
+<div class="content" id="authentication">
+    <label for="auth_token">Enter auth token: </label>
+    <input type="text" name="auth_token" id="auth_token" value="auth"><br>
+    <label for="device_id">Enter device id: </label>
+    <input type="text" name="device_id" id="device_id" value="device">
+</div>
+
+<div class="content" id="command_log">
     Command Log:
     <ol class="actions" id="actions">
     </ol>
 </div>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="/static/bootstrap/js/jquery.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="/static/bootstrap/js/bootstrap.min.js"></script>
     <script src="/static/digger_api.js"></script>

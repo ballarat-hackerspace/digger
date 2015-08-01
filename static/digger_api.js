@@ -5,11 +5,17 @@
 
 var api_endpoint = "/api/";
 
-var most_recent_error = null
+var most_recent_error = null;
 
 function perform_action(action){
     add_log_entry("Try", action);
-    $.ajax(api_endpoint + action, {
+    var data = {
+        auth_token: $("#auth_token").val(),
+        device_id: $("#device_id").val()
+    };
+    console.log(data);
+    var request = $.ajax({
+        url: api_endpoint + action,
         success: function(result){
             add_log_entry("Success", result['message']);
         },
@@ -18,8 +24,11 @@ function perform_action(action){
             console.log(result);
             most_recent_error = result;
         },
-        dataType: "json"
+        data: data,
+        method: 'POST',
+        type: "POST"
     });
+    console.log(request);
 }
 
 

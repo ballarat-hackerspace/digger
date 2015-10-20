@@ -8,7 +8,7 @@ var api_endpoint = "/api/";
 var most_recent_error = null;
 
 function perform_action(action){
-    add_log_entry("Try", action);
+    add_log_entry("Trying:", action);
     var data = {
         auth_token: $("#auth_token").val(),
         device_id: $("#device_id").val()

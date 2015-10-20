@@ -20,13 +20,13 @@ def serve_bootstrap(path):
 valid_actions = {}
 valid_actions["forwards"] = ("forwards", "MOTOR 0 forwards; MOTOR 1 forwards")
 valid_actions["backwards"] = ("backwards", "MOTOR 0 backwards; MOTOR 1 backwards")
-valid_actions["left"] = ("motor_running_function", "MOTOR 0 forwards; MOTOR 1 backwards")
-valid_actions["right"] = ("motor_running_function", "MOTOR 0 backwards; MOTOR 1 forwards")
+valid_actions["left"] = ("left", "MOTOR 0 forwards; MOTOR 1 backwards")
+valid_actions["right"] = ("right", "MOTOR 0 backwards; MOTOR 1 forwards")
 
 valid_actions["clockwise"] = ("motor_running_function", "MOTOR 2 forwards")
 valid_actions["anticlockwise"] = ("motor_running_function", "MOTOR 2 backwards")
 
-valid_actions["arm_up"] = ("arm", "MOTOR 3 forwards")
+valid_actions["arm"] = ("arm", "MOTOR 3 forwards")
 valid_actions["arm_down"] = ("motor_running_function", "MOTOR 3 backwards")
 
 valid_actions["bucket_in"] = ("motor_running_function", "MOTOR 4 forwards")
@@ -43,7 +43,7 @@ core_running = True  # Set to True when the core is running -- otherwise API cal
 
 @app.route("/api/<action>", methods = ['POST', "GET"])
 def do_action(action):
-    app.logger.error(request.form)
+    app.logger.debug(request.form)
     #if not "auth_token" in request.form:
     #    return abort(403)
     auth_token = request.form.get('auth_token', "no auth")
@@ -62,11 +62,11 @@ def do_action(action):
 
     #TODO: Make request here
     if core_running:
-        app.logger.warn("Calling API: " + api_url)
-        app.logger.warn(payload)
+        app.logger.debug("Calling API: " + api_url)
+        app.logger.debug(payload)
         #payload = json.dumps(payload)
         response = post(api_url, data=payload)
-        app.logger.error(response.text)
+        app.logger.debug(response.text)
         response_text = response.text
 
     #TODO: Return status based on whether this worked or not

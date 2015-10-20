@@ -17,10 +17,10 @@ function perform_action(action){
     var request = $.ajax({
         url: api_endpoint + action,
         success: function(result){
-            add_log_entry("Success", result['message']);
+            add_log_entry("Success!", result['response']);
         },
         error: function(result){
-            add_log_entry("Failure", "(see console: var most_recent_error)");
+            add_log_entry("Failure!", "(see console: var most_recent_error)");
             console.log(result);
             most_recent_error = result;
         },

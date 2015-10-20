@@ -18,38 +18,82 @@
     <![endif]-->
 </head>
 
-<body>
+<body role="document">
 
-<div class="content" id="controller">
-    <div class="btn"><a onclick="perform_action('forwards');">Forward</a></div>
-    <div class="btn"><a onclick="perform_action('backwards');">Backwards</a></div>
-    <div class="btn"><a onclick="perform_action('left');">Left</a></div>
-    <div class="btn"><a onclick="perform_action('right');">Right</a></div>
+<div class="container theme-showcase" role="main">
+    <div class="page-content">
+        <div class="row">
+            <div class="col-md-6 text-center">
+                <img src="static/bhack-logo-title-black.svg">
+                <h1 class="page-header">Digger Controls</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="panel panel-success">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Controls:</h3>
+                    </div>
+                    <div class="panel-body text-center">
+                        <a onclick="perform_action('forwards');"><button type="button" class="btn btn-success">Forward</button></a>
+                    <a onclick="perform_action('backwards');"><button type="button" class="btn btn-success">Backwards</button></a>
+                    <a onclick="perform_action('left');"><button type="button" class="btn btn-success">Left</button></a>
+                    <a onclick="perform_action('right');"><button type="button" class="btn btn-success">Right</button></a>
 
-    <div class="btn"><a onclick="perform_action('clockwise');">Clockwise</a></div>
-    <div class="btn"><a onclick="perform_action('anticlockwise');">Anti-clockwise</a></div>
+                    <a onclick="perform_action('arm');"><button class="btn btn-success">Arm</button></a>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-    <div class="btn"><a onclick="perform_action('arm_up');">Arm Up</a></div>
-    <div class="btn"><a onclick="perform_action('arm_down');">Arm Down</a></div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Access Details:</h3>
+                    </div>
+                    <div class="panel-body">
+                        <label for="auth_token" class="badge"> Enter auth token: </label>
+                        <input type="text" name="auth_token" id="auth_token" value="532d4e6f48532607c80c88493cc5bfa29908b955"><br>
+                        <label for="device_id" class="badge">Enter device id: </label>
+                        <input type="text" name="device_id" id="device_id" value="48ff6f065067555038171287">
+                    </div>
+                </div>
+            </div>
+        </div>
 
-    <div class="btn"><a onclick="perform_action('bucket_in');">Bucket In</a></div>
-    <div class="btn"><a onclick="perform_action('bucket_out');">Bucket Out</a></div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Command Log:</h3>
+                    </div>
+                    <div class="panel-body"  id="command_log">
+                        <ol class="actions" id="actions">
+                    </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-    <div class="btn"><a onclick="perform_action('stop');">STOP!</a></div>
+        <div class="row" style="display:none;">
+            <div class="col-md-12">
+                <div class="page-header">
+                    <h1>Notes:</h1>
+                </div>
+                <div class="content" id="instructions">
+                    Instructions
+                    <ol class="actions" id="instructions">
+                        <li>Login: curl https://api.particle.io/oauth/token -u particle:particle -d grant_type=password -d username=robertlayton@gmail.com -d password=</li>
+                        <li></li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
-<div class="content" id="authentication">
-    <label for="auth_token">Enter auth token: </label>
-    <input type="text" name="auth_token" id="auth_token" value="auth"><br>
-    <label for="device_id">Enter device id: </label>
-    <input type="text" name="device_id" id="device_id" value="device">
-</div>
 
-<div class="content" id="command_log">
-    Command Log:
-    <ol class="actions" id="actions">
-    </ol>
-</div>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="/static/bootstrap/js/jquery.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->

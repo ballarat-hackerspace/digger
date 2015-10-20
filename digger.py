@@ -1,4 +1,5 @@
 from requests import post
+import json
 from flask import Flask, send_from_directory, abort, jsonify
 from flask import request
 
@@ -17,15 +18,15 @@ def serve_bootstrap(path):
 #TODO These should correlate to functions on the particle core.
 # First argument is the function name, second is the arguments to pass
 valid_actions = {}
-valid_actions["forwards"] = ("motor_running_function", "MOTOR 0 forwards; MOTOR 1 forwards")
-valid_actions["backwards"] = ("motor_running_function", "MOTOR 0 backwards; MOTOR 1 backwards")
+valid_actions["forwards"] = ("forwards", "MOTOR 0 forwards; MOTOR 1 forwards")
+valid_actions["backwards"] = ("backwards", "MOTOR 0 backwards; MOTOR 1 backwards")
 valid_actions["left"] = ("motor_running_function", "MOTOR 0 forwards; MOTOR 1 backwards")
 valid_actions["right"] = ("motor_running_function", "MOTOR 0 backwards; MOTOR 1 forwards")
 
 valid_actions["clockwise"] = ("motor_running_function", "MOTOR 2 forwards")
 valid_actions["anticlockwise"] = ("motor_running_function", "MOTOR 2 backwards")
 
-valid_actions["arm_up"] = ("motor_running_function", "MOTOR 3 forwards")
+valid_actions["arm_up"] = ("arm", "MOTOR 3 forwards")
 valid_actions["arm_down"] = ("motor_running_function", "MOTOR 3 backwards")
 
 valid_actions["bucket_in"] = ("motor_running_function", "MOTOR 4 forwards")
@@ -34,9 +35,9 @@ valid_actions["bucket_out"] = ("motor_running_function", "MOTOR 4 backwards")
 valid_actions["stop"] = ("motor_running_function", "MOTOR * stop")
 
 # API Format for calling a function: https://api.spark.io/v1/devices/<DEVICEID>/<FUNCTION>
-function_api = "https://api.spark.io/v1/devices/{device_id}/{function}"
+function_api = "https://api.particle.io/v1/devices/{device_id}/{function}"
 
-core_running = False  # Set to True when the core is running -- otherwise API calls aren't actually made!
+core_running = True  # Set to True when the core is running -- otherwise API calls aren't actually made!
 
 #TODO Should be POST, and this should be secured anyway with HTTPS
 
@@ -55,15 +56,23 @@ def do_action(action):
 
     payload = {}
     payload['access_token'] = auth_token
-    payload['arg'] = function_args
+    #payload['arg'] = function_args
+
+    response_text = "No actual response made"
 
     #TODO: Make request here
     if core_running:
-        post(api_url, data=payload)
+        app.logger.warn("Calling API: " + api_url)
+        app.logger.warn(payload)
+        #payload = json.dumps(payload)
+        response = post(api_url, data=payload)
+        app.logger.error(response.text)
+        response_text = response.text
 
     #TODO: Return status based on whether this worked or not
     f = {"status": "success", "action": action,
-         "message": api_url + ", payload: {}".format(payload)}
+         "message": api_url + ", payload: {}".format(payload),
+         "response": response_text}
     return jsonify(**f)
 
 
@@ -73,5 +82,5 @@ if __name__ == '__main__':
     #    handler = logging.FileHandler("output.log")
     #    handler.setLevel(logging.DEBUG)
     #    app.logger.addHandler(handler)
-    app.run(use_debugger=False, use_reloader=False, debug=True)
+    app.run(use_debugger=False, use_reloader=True, debug=True)
     #app.run(debug=True)

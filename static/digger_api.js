@@ -3,7 +3,7 @@
  */
 
 
-var api_endpoint = "/api/";
+var api_endpoint = "api/";
 
 var most_recent_error = null;
 
